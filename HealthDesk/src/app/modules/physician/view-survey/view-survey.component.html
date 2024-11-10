@@ -1,0 +1,19 @@
+<div class="container">
+    <h2 class="animated-heading">
+      <i class="bi bi-clipboard-check me-2"></i>View Survey
+    </h2>
+    <div class="card">
+      <div class="card-body">
+        <h3>{{ survey.name }}</h3>
+        <p><strong>Survey Creator:</strong> {{ survey.creator }}</p>
+        <p><strong>Company:</strong> {{ survey.company }}</p>
+        <p><strong>Survey Taken Date:</strong> {{ survey.takenDate}}</p>
+        <h5>Questions and Responses</h5>
+        <div *ngFor="let question of survey.questions">
+          <p><strong>{{ question.text }}</strong></p>
+          <p>{{ question.response }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

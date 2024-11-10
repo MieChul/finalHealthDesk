@@ -1,0 +1,141 @@
+<div class="container">
+    <h1 class="animated-heading">
+      <i class="bi bi-file-earmark-medical me-2"></i>Manage Patient Records
+    </h1>
+  
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-6 col-sm-12 d-flex">
+        <div class="floating-label me-3">
+          <input type="text" id="search" (input)="searchPatient($event)" placeholder=" " class="form-control" />
+          <label for="search">Search Patient by Name</label>
+        </div>
+        <div>
+          <button class="btn btn-primary add-button" (click)="openAddPatientPopup()" data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Patient">
+            <i class="bi bi-person-plus me-2"></i>Add New Patient
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="showHistory">
+      <button class="btn btn-secondary mb-3" (click)="backToMain()" data-bs-toggle="tooltip" data-bs-placement="top" title="Back">
+        <i class="bi bi-arrow-left"></i> Back
+      </button>
+      <div class="table-responsive">
+        <table class="table table-hover table-modern">
+          <tr>
+            <td><strong>Patient Name:</strong> {{ currentPatient?.name }}</td>
+            <td><strong>Age:</strong> {{ currentPatient?.age }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="table-container" infiniteScroll (scrolled)="onScroll()" infiniteScrollDistance="2">
+        <table class="table table-hover table-modern">
+          <thead>
+            <tr>
+              <th>Sr.No.</th>
+              <th>Visited Date</th>
+              <th>Illness</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of patientHistory; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ record.visitedDate | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ record.illness }}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-info btn-sm" (click)="viewPatient(record)" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div *ngIf="!showHistory">
+      <div class="table-container" infiniteScroll (scrolled)="onScroll()" infiniteScrollDistance="2">
+        <table class="table table-hover table-modern">
+          <thead>
+            <tr>
+              <th (click)="sortTable('id')">Sr.No.</th>
+              <th (click)="sortTable('name')">Patient Name</th>
+              <th (click)="sortTable('age')">Age</th>
+              <th (click)="sortTable('mobile')">Mobile Number</th>
+              <th (click)="sortTable('lastVisited')">Last Visited Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of filteredPatients">
+              <td>{{ patient.id }}</td>
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.age }}</td>
+              <td>{{ patient.mobile }}</td>
+              <td>{{ patient.lastVisited | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-info btn-sm" [class.disabled]="!patient.view" (click)="viewPatient(patient)" [disabled]="!patient.view" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                  <button class="btn btn-warning btn-sm" [class.disabled]="!patient.history" (click)="viewHistory(patient)" [disabled]="!patient.history" data-bs-toggle="tooltip" data-bs-placement="top" title="History">
+                    <i class="bi bi-clock-history"></i>
+                  </button>
+                  <button class="btn btn-success btn-sm" (click)="createPrescription(patient)" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate Prescription">
+                    <i class="bi bi-file-earmark-text"></i>
+                  </button>
+                  <button class="btn btn-secondary btn-sm" (click)="createPrescription(patient)" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate Medical Certificate">
+                    <i class="bi bi-file-earmark-medical"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add Patient Modal -->
+  <div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="addPatientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addPatientModalLabel">Add New Patient</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="addPatient()">
+            <div class="form-floating mb-3">
+              <input type="text" id="name" [(ngModel)]="newPatient.name" name="name" class="form-control" placeholder="Name" required />
+              <label for="name">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="number" id="age" [(ngModel)]="newPatient.age" name="age" class="form-control" placeholder="Age" required />
+              <label for="age">Age</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" id="mobile" [(ngModel)]="newPatient.mobile" name="mobile" class="form-control" placeholder="Mobile Number" required />
+              <label for="mobile">Mobile Number</label>
+            </div>
+            <div class="form-floating mb-3">
+              <div class="input-group">
+                <input type="date" id="lastVisited" [(ngModel)]="newPatient.lastVisited" name="lastVisited" class="form-control" placeholder="Last Visited Date" required />
+                <label for="lastVisited">Last Visited Date</label>
+                <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

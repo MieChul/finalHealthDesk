@@ -1,0 +1,35 @@
+<div class="container">
+    <h2 class="animated-heading">
+      <i class="bi bi-pencil-square me-2"></i>Take Survey
+    </h2>
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="surveyForm" (ngSubmit)="submitSurvey()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Survey Name</label>
+            <input type="text" id="name" formControlName="name" class="form-control" readonly />
+          </div>
+          <div class="mb-3">
+            <label for="number" class="form-label">Survey Number</label>
+            <input type="text" id="number" formControlName="number" class="form-control" readonly />
+          </div>
+          <div class="mb-3">
+            <label for="creator" class="form-label">Survey Creator</label>
+            <input type="text" id="creator" formControlName="creator" class="form-control" readonly />
+          </div>
+          <div class="mb-3">
+            <label for="company" class="form-label">Survey Company</label>
+            <input type="text" id="company" formControlName="company" class="form-control" readonly />
+          </div>
+          <div formArrayName="questions">
+            <div *ngFor="let question of questions.controls; let i = index" [formGroupName]="i" class="mb-3">
+              <label [for]="'question' + i" class="form-label">{{ question.get('text')?.value }}</label>
+              <input type="text" [id]="'question' + i" formControlName="response" class="form-control" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

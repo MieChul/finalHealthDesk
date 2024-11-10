@@ -1,0 +1,65 @@
+<div class="container">
+    <h2 class="animated-heading">
+      <i class="bi bi-journal me-2"></i> Medical Journals
+    </h2>
+  
+    <div class="table-wrapper">
+      <div class="table-responsive">
+        <table class="table table-modern table-hover">
+          <thead>
+            <tr>
+              <th class="sticky-header" style="width: 50px;">Sr. No</th>
+              <th class="sticky-header" (click)="sort('name')">Name of Journal <i [ngClass]="getSortIcon('name')"></i></th>
+              <th class="sticky-header" style="width: 100px;" (click)="sort('publisher')">Publisher <i [ngClass]="getSortIcon('publisher')"></i></th>
+              <th class="sticky-header" (click)="sort('speciality')">Speciality <i [ngClass]="getSortIcon('speciality')"></i></th>
+              <th class="sticky-header" (click)="sort('subSpeciality')">Sub-speciality <i [ngClass]="getSortIcon('subSpeciality')"></i></th>
+              <th style="width: 100px;" (click)="sort('country')">Country <i [ngClass]="getSortIcon('country')"></i></th>
+              <th (click)="sort('frequency')">Frequency <i [ngClass]="getSortIcon('frequency')"></i></th>
+              <!-- Slim scroll columns start here -->
+              <th (click)="sort('firstIssueDate')">First Issue Date <i [ngClass]="getSortIcon('firstIssueDate')"></i></th>
+              <th (click)="sort('issuesPerYear')">Issues/Year <i [ngClass]="getSortIcon('issuesPerYear')"></i></th>
+              <th (click)="sort('impactFactor')">Impact Factor <i [ngClass]="getSortIcon('impactFactor')"></i></th>
+              <th (click)="sort('indexCopernicus')">Index Copernicus <i [ngClass]="getSortIcon('indexCopernicus')"></i></th>
+              <th>Web Link</th>
+              <th>Author Guidelines</th>
+            </tr>
+            <tr>
+              <th></th>
+              <th><input type="text" class="sticky-header form-control" placeholder="Search" [(ngModel)]="filters.name" (input)="filterJournals()"></th>
+              <th><input type="text" class="sticky-header form-control" placeholder="Search" [(ngModel)]="filters.publisher" (input)="filterJournals()"></th>
+              <th><input type="text" class="sticky-header form-control" placeholder="Search" [(ngModel)]="filters.speciality" (input)="filterJournals()"></th>
+              <th><input type="text" class="sticky-header form-control" placeholder="Search" [(ngModel)]="filters.subSpeciality" (input)="filterJournals()"></th>
+              <th><input type="text" class="sticky-header form-control" placeholder="Search" [(ngModel)]="filters.country" (input)="filterJournals()"></th>
+              <th><input type="text" class="sticky-header form-control" placeholder="Search" [(ngModel)]="filters.frequency" (input)="filterJournals()"></th>
+              <!-- Slim scroll filters start here -->
+              <th><input type="text" class="form-control" placeholder="Search" [(ngModel)]="filters.firstIssueDate" (input)="filterJournals()"></th>
+              <th><input type="text" class="form-control" placeholder="Search" [(ngModel)]="filters.issuesPerYear" (input)="filterJournals()"></th>
+              <th><input type="text" class="form-control" placeholder="Search" [(ngModel)]="filters.impactFactor" (input)="filterJournals()"></th>
+              <th><input type="text" class="form-control" placeholder="Search" [(ngModel)]="filters.indexCopernicus" (input)="filterJournals()"></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let journal of filteredJournals; let i = index">
+              <td class="sticky-column">{{ i + 1 }}</td>
+              <td class="sticky-column">{{ journal.name }}</td>
+              <td class="sticky-column">{{ journal.publisher }}</td>
+              <td class="sticky-column">{{ journal.speciality }}</td>
+              <td class="sticky-column">{{ journal.subSpeciality }}</td>
+              <td>{{ journal.country }}</td>
+              <td>{{ journal.frequency }}</td>
+              <!-- Slim scroll columns start here -->
+              <td>{{ journal.firstIssueDate }}</td>
+              <td>{{ journal.issuesPerYear }}</td>
+              <td>{{ journal.impactFactor }}</td>
+              <td>{{ journal.indexCopernicus }}</td>
+              <td><a href="{{ journal.webLink }}" target="_blank">Link</a></td>
+              <td><a href="{{ journal.authorGuidelines }}" target="_blank">Guidelines</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

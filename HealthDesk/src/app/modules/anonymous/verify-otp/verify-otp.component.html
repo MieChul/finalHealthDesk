@@ -1,0 +1,61 @@
+<div class="capsule-container">
+    <div class="logo-container">
+      <div class="logo-animated"></div>
+      <h2 class="page-header">HealthDesk</h2>
+    </div>
+  
+    <h3 class="page-header">Verify Your {{ selectedRole === 'Physician' || selectedRole === 'Patient' ? 'Mobile Number' : 'Email' }}</h3>
+  
+    <form [formGroup]="verifyOtpForm" (ngSubmit)="sendOtp()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ selectedRole === 'Physician' || selectedRole === 'Patient' ? 'Mobile Number' : 'Email' }}</mat-label>
+      
+        <input matInput formControlName="contact" 
+               [placeholder]="selectedRole === 'Physician' || selectedRole === 'Patient' ? 'Enter Mobile Number' : 'Enter Email'">
+               
+        <mat-error *ngIf="getControl('contact')?.invalid && verifyOtpForm.get('contact')?.touched">
+          {{ selectedRole === 'Physician' || selectedRole === 'Patient' ? 'Please enter a valid mobile number' : 'Please enter a valid email' }}
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Show reCAPTCHA only before OTP is sent -->
+      <div *ngIf="!isOtpSent" class="captcha-container">
+        <re-captcha (resolved)="onCaptchaResolved($event)" siteKey="6LeLvHIqAAAAAJJVlNmel7PIIAdvQ1Gw3JeaXSMP"></re-captcha>
+      </div>
+  
+      <div class="resend-otp-message" *ngIf="isOtpSent && !isResendAvailable">
+        <span class="resend-countdown">Resend OTP in {{ countdown }} seconds</span>
+      </div>
+  
+      <button mat-raised-button color="primary" class="full-width login-button m-3" type="submit" [disabled]="!captchaVerified || isOtpSent && !isResendAvailable">
+        {{ isOtpSent ? 'Resend OTP' : 'Send OTP' }}
+      </button>
+    </form>
+  
+    <!-- OTP Section, displayed after clicking Send OTP -->
+    <div *ngIf="isOtpSent" class="otp-section" [formGroup]="verifyOtpForm">
+      <h4 class="otp-title">Enter OTP</h4>
+      <div formArrayName="otp" class="otp-inputs">
+        <input maxlength="1" *ngFor="let control of otpControls.controls; let i = index" [formControlName]="i" class="otp-input">
+      </div>
+  
+      <button mat-raised-button color="primary" class="full-width login-button m-2" (click)="verifyOtp()">Verify OTP</button>
+    </div>
+  
+    <div class="divider">or</div>
+  
+    <div class="auth-options">
+      <p class="signup-text">
+       Already have an account?
+        <a (click)="navigateToLogin()" class="signup-link cursor-pointer">
+          <mat-icon>person_add</mat-icon> Sign In
+        </a>
+      </p>
+      <p class="signup-text">
+        <a (click)="navigateVerifyPassword()" class="cursor-pointer">
+          <mat-icon>lock_open</mat-icon> Forgot Password?
+        </a>
+      </p>
+    </div>
+  </div>
+  

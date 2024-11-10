@@ -1,0 +1,13 @@
+<div class="d-flex" style="height: 100vh;">
+  <app-side-nav [navItems]="navItems" class="side-nav"></app-side-nav>
+    <div class="flex-grow-1 d-flex flex-column">
+      <app-header class="header"></app-header>
+  
+      <main class="flex-grow-1 p-4 overflow-auto">
+        <router-outlet></router-outlet>
+      </main>
+  
+      <app-footer class="footer"></app-footer>
+    </div>
+  </div>
+  

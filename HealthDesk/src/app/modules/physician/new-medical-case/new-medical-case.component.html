@@ -1,0 +1,94 @@
+<div class="container">
+    <button class="btn btn-secondary mb-3" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i> Back
+    </button>
+    <h2 class="animated-heading">
+      <i class="bi bi-file-earmark-plus me-2"></i>New Medical Case
+    </h2>
+    <form (ngSubmit)="submitCase()">
+      <div class="mb-3">
+        <label>Upload Images (Max 3)</label>
+        <div *ngFor="let image of images; let i = index">
+          <div class="input-group mb-2">
+            <input type="file" class="form-control" (change)="onFileSelected($event, i)">
+            <button class="btn btn-danger" *ngIf="i > 0" (click)="removeImage(i)">-</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" (click)="addImage()" *ngIf="images.length < 3">+</button>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="speciality" placeholder="Speciality" [(ngModel)]="speciality" name="speciality" required>
+            <label for="speciality">Speciality</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="diagnosis" placeholder="Diagnosis" [(ngModel)]="diagnosis" name="diagnosis" required>
+            <label for="diagnosis">Diagnosis</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="patientInitials" placeholder="Patient Initials" [(ngModel)]="patientInitials" name="patientInitials" required>
+            <label for="patientInitials">Patient Initials</label>
+            <span *ngIf="!validInitials" class="text-danger">Required, only 3 letters, no special characters except ('. ')</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="age" placeholder="Age (years)" [(ngModel)]="age" name="age" min="0" max="150" required>
+            <label for="age">Age (years)</label>
+            <span *ngIf="ageError" class="text-danger mt-1 mb-3">{{ ageError }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label>Chief Complaints</label>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Complaint</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let complaint of chiefComplaints; let i = index">
+              <td>
+                <input type="text" class="form-control" [(ngModel)]="chiefComplaints[i]" name="complaint{{i}}" required>
+              </td>
+              <td>
+                <button class="btn btn-danger" (click)="removeComplaint(i)">-</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="btn btn-primary" (click)="addComplaint()">Add Complaint</button>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" id="pastHistory" placeholder="Past History" [(ngModel)]="pastHistory" name="pastHistory" required></textarea>
+        <label for="pastHistory">Past History</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" id="examination" placeholder="Examination" [(ngModel)]="examination" name="examination" required></textarea>
+        <label for="examination">Examination</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" id="investigation" placeholder="Investigation" [(ngModel)]="investigation" name="investigation" required></textarea>
+        <label for="investigation">Investigations</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" id="treatment" placeholder="Treatment" [(ngModel)]="treatment" name="treatment" required></textarea>
+        <label for="treatment">Treatment</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea class="form-control" id="caseSummary" placeholder="Case Summary" [(ngModel)]="caseSummary" name="caseSummary" required></textarea>
+        <label for="caseSummary">Case Summary</label>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Submit</button>
+    </form>
+  </div>
+  

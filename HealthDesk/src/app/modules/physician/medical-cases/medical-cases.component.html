@@ -1,0 +1,144 @@
+<div class="container">
+    <h2 class="animated-heading">
+      <i class="bi bi-journal-medical me-2"></i>Medical Cases
+    </h2>
+    <ul class="nav nav-tabs" id="medicalCasesTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="other-cases-tab" data-bs-toggle="tab" data-bs-target="#other-cases" type="button" role="tab" aria-controls="other-cases" aria-selected="true">
+          Cases
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="your-cases-tab" data-bs-toggle="tab" data-bs-target="#your-cases" type="button" role="tab" aria-controls="your-cases" aria-selected="false">
+          Your Cases
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="medicalCasesTabsContent">
+      <!-- Other Cases Tab -->
+      <div class="tab-pane fade show active" id="other-cases" role="tabpanel" aria-labelledby="other-cases-tab">
+        <div class="row mb-3">
+          <div class="col">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="speciality" placeholder="Speciality">
+              <label for="speciality">Speciality</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="diagnosis" placeholder="Diagnosis">
+              <label for="diagnosis">Diagnosis</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating mb-3">
+              <input type="number" class="form-control" id="ageGroup" placeholder="Age Group">
+              <label for="ageGroup">Age Group</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-floating mb-3">
+              <input type="datetime-local" class="form-control" id="uploadDate" placeholder="Upload Date">
+              <label for="uploadDate">Upload Date</label>
+            </div>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary w-100">Search</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let case of otherCases">
+            <div class="card mb-3 small">
+              <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Case Image">
+              <div class="card-body">
+                <h5 class="card-title">Case {{ case.id }}</h5>
+                <p class="card-text">{{ case.shortDescription }}...</p>
+                <p class="card-text">Submitted by: {{ case.submittedBy }}</p>
+                <p class="card-text">Speciality: {{ case.speciality }}</p>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <button class="btn btn-primary" (click)="viewCase(case.id)">View</button>
+                  <div>
+                    <button class="btn btn-outline-secondary me-1" (click)="likeCase(case.id)">
+                      <i class="bi bi-hand-thumbs-up"></i> Like <span>{{ case.likeCount }}</span>
+                    </button>
+                    <button class="btn btn-outline-secondary me-1" (click)="viewComments(case.id)">
+                      <i class="bi bi-chat-dots"></i> Comments <span>{{ case.comments.length }}</span>
+                    </button>
+                    <button class="btn btn-outline-secondary" (click)="shareCase(case.id)">
+                      <i class="bi bi-share"></i> Share
+                    </button>
+                  </div>
+                </div>
+                <div class="comments mt-3">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Write a comment..." [(ngModel)]="newComment[case.id]">
+                    <button class="btn btn-primary" (click)="addComment(case.id)">Send</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Your Cases Tab -->
+      <div class="tab-pane fade" id="your-cases" role="tabpanel" aria-labelledby="your-cases-tab">
+        <button type="button" class="btn btn-primary mb-3" (click)="createNewCase()">New Case</button>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let case of yourCases">
+            <div class="card mb-3 small">
+              <img src="https://via.placeholder.com/400x200" class="card-img-top" alt="Case Image">
+              <div class="card-body">
+                <h5 class="card-title">Case {{ case.id }}</h5>
+                <p class="card-text">{{ case.shortDescription }}...</p>
+                <p class="card-text">Submitted by: {{ case.submittedBy }}</p>
+                <p class="card-text">Speciality: {{ case.speciality }}</p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-primary" (click)="viewCase(case.id)">View</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Comments Modal -->
+    <div class="modal fade" id="commentsModal" tabindex="-1" aria-labelledby="commentsModalLabel" aria-hidden="true" #commentsModal>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="commentsModalLabel">Comments</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li *ngFor="let comment of comments">{{ comment }}</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Share Modal -->
+    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true" #shareModal>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="shareModalLabel">Share Medical Case</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Copy the link below to share this case:</p>
+            <input type="text" class="form-control" [value]="shareLink" readonly>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

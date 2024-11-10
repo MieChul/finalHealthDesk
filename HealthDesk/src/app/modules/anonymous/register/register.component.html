@@ -1,0 +1,88 @@
+<div class="capsule-container">
+    <div class="logo-container">
+      <div class="logo-animated"></div>
+     
+    </div>
+    <h3 class="page-header">Register</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- Role Field -->
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Role *</mat-label>
+          <input matInput formControlName="role" readonly>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width" *ngIf="prefilledMobile">
+          <mat-label>Mobile Number</mat-label>
+          <input matInput formControlName="mobile" placeholder="Enter mobile number">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width" *ngIf="prefilledEmail">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Enter email">
+        </mat-form-field>
+      </div>
+  
+      <!-- Email Field -->
+      <div class="form-row">
+        <!-- Title Field -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" placeholder="Enter username">
+          <button mat-icon-button matSuffix matTooltip="Bweteen 5 to 10 characters long and only alphanumeric allowed.">
+            <mat-icon>info</mat-icon>
+          </button>
+          <mat-error *ngIf="getControl('username')?.invalid && getControl('username')?.touched">
+            {{'Please enter a valid username'}}
+          </mat-error>
+        </mat-form-field>
+        
+      </div>
+  
+      <!-- Password and Confirm Password Fields -->
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Enter password">
+          <button mat-icon-button matSuffix matTooltip="6+ characters, alphanumeric, and symbols (_@.$&*-)">
+            <mat-icon>info</mat-icon>
+          </button>
+          <mat-error *ngIf="getControl('password')?.invalid && getControl('password')?.touched">
+            {{'Please enter a valid password'}}
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput formControlName="confirmPassword" required [type]="hide ? 'password' : 'text'"
+            placeholder="Confirm password">
+          <div mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Show password'" class="m-1 cursor-pointer">
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </div>
+          <mat-error *ngIf="!isPasswordMatch() && getControl('confirmPassword')?.touched">
+            Passwords do not match
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Submit and Clear Buttons -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit">Sign Up</button>
+        <button mat-raised-button color="warn" type="button" (click)="onClear()">Clear</button>
+      </div>
+    </form>
+    <div class="auth-options">
+      <p class="signup-text">
+       Already have an account?
+        <a (click)="navigateToLogin()" class="signup-link cursor-pointer">
+          <mat-icon>person_add</mat-icon> Sign In
+        </a>
+      </p>
+      <p class="signup-text">
+        <a (click)="navigateVerifyPassword()" class="cursor-pointer">
+          <mat-icon>lock_open</mat-icon> Forgot Password?
+        </a>
+      </p>
+    </div>
+  </div>
+  

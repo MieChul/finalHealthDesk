@@ -1,0 +1,12 @@
+D:\HealthDesk\HealthDesk.Core\bin\Debug\net8.0\HealthDesk.Core.deps.json
+D:\HealthDesk\HealthDesk.Core\bin\Debug\net8.0\HealthDesk.Core.dll
+D:\HealthDesk\HealthDesk.Core\bin\Debug\net8.0\HealthDesk.Core.pdb
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\HealthDesk.Core.csproj.AssemblyReference.cache
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\HealthDesk.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\HealthDesk.Core.AssemblyInfoInputs.cache
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\HealthDesk.Core.AssemblyInfo.cs
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\HealthDesk.Core.csproj.CoreCompileInputs.cache
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\HealthDesk.Core.dll
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\refint\HealthDesk.Core.dll
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\HealthDesk.Core.pdb
+D:\HealthDesk\HealthDesk.Core\obj\Debug\net8.0\ref\HealthDesk.Core.dll

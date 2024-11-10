@@ -1,0 +1,54 @@
+<div class="container">
+    <!-- Back Button with Arrow -->
+    <button class="btn btn-secondary mb-3" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i> Back
+    </button>
+  
+    <h2 class="animated-heading">
+      <i class="bi bi-journal-text me-2"></i>Medical Case Details
+    </h2>
+  
+    <div class="card mb-3">
+      <img src="https://via.placeholder.com/800x200" class="card-img-top" alt="Case Image">
+      <div class="card-body">
+        <h3 class="card-title">{{ caseDetails.speciality }}</h3>
+        <p class="text-muted">Diagnosis: {{ caseDetails.diagnosis }}</p>
+        
+        <!-- Case Details Sections -->
+        <div class="case-section" *ngFor="let detail of caseDetailSections">
+          <h5>{{ detail.title }}</h5>
+          <p>{{ detail.content }}</p>
+        </div>
+        
+        <!-- Like and Share Buttons -->
+        <div class="d-flex justify-content-end mt-3">
+          <button class="btn btn-outline-secondary me-2" (click)="likeCase()">
+            <i class="bi bi-hand-thumbs-up"></i> Like <span>{{ caseDetails.likeCount }}</span>
+          </button>
+          <button class="btn btn-outline-secondary" (click)="openShareModal()">
+            <i class="bi bi-share"></i> Share
+          </button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Share Modal -->
+    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true" #shareModal>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="shareModalLabel">Share Medical Case</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Copy the link below to share this case:</p>
+            <input type="text" class="form-control" [value]="shareLink" readonly>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

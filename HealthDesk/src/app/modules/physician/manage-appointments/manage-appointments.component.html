@@ -1,0 +1,211 @@
+<div class="container">
+    <h1 class="animated-heading">
+      <i class="bi bi-calendar-check me-2"></i>Manage Appointments
+    </h1>
+  
+    <form [formGroup]="appointmentsForm">
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-8 col-sm-6 d-flex justify-content-start flex-wrap">
+          <div class="mb-3">
+            <label for="startDate" class="form-label label-modern shadow">Start Date</label>
+            <input type="date" id="startDate" class="form-control" formControlName="startDate" (change)="filterAppointmentsByDate()">
+          </div>
+          <div class="mb-3">
+            <label for="endDate" class="form-label label-modern shadow">End Date</label>
+            <input type="date" id="endDate" class="form-control" formControlName="endDate" (change)="filterAppointmentsByDate()">
+          </div>
+        </div>
+  
+        <div class="col-md-4 col-sm-6 d-flex justify-content-end flex-wrap">
+          <div class="legend me-3 mb-2">
+            <span class="legend-color upcoming-appointment"></span> Upcoming Appointment
+          </div>
+          <div class="legend me-3 mb-2">
+            <span class="legend-color past-appointment"></span> Past Appointment
+          </div>
+          <div class="legend mb-2">
+            <span class="legend-color proposed-time"></span> Proposed Time
+          </div>
+        </div>
+      </div>
+    </form>
+  
+    <ul class="nav nav-tabs" id="appointmentTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="true">
+          <i class="bi bi-hourglass-split me-1"></i>Pending
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="accepted-tab" data-bs-toggle="tab" data-bs-target="#accepted" type="button" role="tab" aria-controls="accepted" aria-selected="false">
+          <i class="bi bi-check-circle me-1"></i>Accepted
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="rejected-tab" data-bs-toggle="tab" data-bs-target="#rejected" type="button" role="tab" aria-controls="rejected" aria-selected="false">
+          <i class="bi bi-x-circle me-1"></i>Rejected
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="appointmentTabsContent">
+      <!-- Pending Tab -->
+      <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+        <div class="table-responsive mt-3">
+          <table class="table table-hover table-modern">
+            <thead>
+              <tr>
+                <th (click)="sortAppointments('patientName')">Patient Name</th>
+                <th (click)="sortAppointments('appointmentDate')">Appointment Date</th>
+                <th (click)="sortAppointments('appointmentTime')">Appointment Time</th>
+                <th (click)="sortAppointments('clinicName')">Clinic Name</th>
+                <th (click)="sortAppointments('mobileNumber')">Mobile Number</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of filteredPendingAppointments" [ngClass]="{
+                'proposed-time': appointment.proposed,
+                'upcoming-appointment': isUpcoming(appointment) && !appointment.proposed,
+                'past-appointment': !isUpcoming(appointment) && !appointment.proposed
+              }" tooltipClass="tooltip-inner">
+                <td>{{ appointment.patientName }}</td>
+                <td>{{ appointment.appointmentDate | date:'dd-MM-yyyy' }}</td>
+                <td>{{ appointment.appointmentTime }}</td>
+                <td>{{ appointment.clinicName }}</td>
+                <td>{{ appointment.mobileNumber }}</td>
+                <td>
+                  <button class="btn btn-success btn-sm me-1" (click)="acceptAppointment(appointment)" [disabled]="appointment.proposed" ngbTooltip="Accept" tooltipClass="accept-tooltip">
+                    <i class="bi bi-check-circle"></i>
+                  </button>
+                  <button class="btn btn-warning btn-sm me-1" (click)="proposeNewTime(appointment)" [disabled]="appointment.proposed" ngbTooltip="Propose New Time" tooltipClass="propose-tooltip">
+                    <i class="bi bi-clock"></i>
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="rejectAppointment(appointment)" [disabled]="appointment.proposed" ngbTooltip="Reject" tooltipClass="reject-tooltip">
+                    <i class="bi bi-x-circle"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Accepted Tab -->
+      <div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
+        <div class="table-responsive mt-3">
+          <table class="table table-hover table-modern">
+            <thead>
+              <tr>
+                <th (click)="sortAppointments('patientName')">Patient Name</th>
+                <th (click)="sortAppointments('appointmentDate')">Appointment Date</th>
+                <th (click)="sortAppointments('appointmentTime')">Appointment Time</th>
+                <th (click)="sortAppointments('clinicName')">Clinic Name</th>
+                <th (click)="sortAppointments('mobileNumber')">Mobile Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of acceptedAppointments" [ngClass]="{
+                'upcoming-appointment': isUpcoming(appointment),
+                'past-appointment': !isUpcoming(appointment)
+              }">
+                <td>{{ appointment.patientName }}</td>
+                <td>{{ appointment.appointmentDate | date:'dd-MM-yyyy' }}</td>
+                <td>{{ appointment.appointmentTime }}</td>
+                <td>{{ appointment.clinicName }}</td>
+                <td>{{ appointment.mobileNumber }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Rejected Tab -->
+      <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
+        <div class="table-responsive mt-3">
+          <table class="table table-hover table-modern">
+            <thead>
+              <tr>
+                <th (click)="sortAppointments('patientName')">Patient Name</th>
+                <th (click)="sortAppointments('appointmentDate')">Appointment Date</th>
+                <th (click)="sortAppointments('appointmentTime')">Appointment Time</th>
+                <th (click)="sortAppointments('clinicName')">Clinic Name</th>
+                <th (click)="sortAppointments('mobileNumber')">Mobile Number</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let appointment of rejectedAppointments">
+                <td>{{ appointment.patientName }}</td>
+                <td>{{ appointment.appointmentDate | date:'dd-MM-yyyy' }}</td>
+                <td>{{ appointment.appointmentTime }}</td>
+                <td>{{ appointment.clinicName }}</td>
+                <td>{{ appointment.mobileNumber }}</td>
+                <td>{{ appointment.reason }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Propose New Time Modal -->
+  <div class="modal fade" id="proposeTimeModal" tabindex="-1" aria-labelledby="proposeTimeModalLabel" aria-hidden="true" #proposeTimeModal>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="proposeTimeModalLabel">Propose New Time</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="proposeTimeForm">
+            <div class="mb-3">
+              <label for="newDate" class="form-label label-modern shadow">New Date</label>
+              <input type="date" id="newDate" formControlName="newDate" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="newTime" class="form-label label-modern shadow">New Time</label>
+              <input type="time" id="newTime" formControlName="newTime" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="clinicName" class="form-label label-modern shadow">Clinic Name</label>
+              <select id="clinicName" formControlName="clinicName" class="form-select">
+                <option *ngFor="let clinic of clinics" [value]="clinic">{{ clinic }}</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="saveProposedTime()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Reject Reason Modal -->
+  <div class="modal fade" id="rejectReasonModal" tabindex="-1" aria-labelledby="rejectReasonModalLabel" aria-hidden="true" #rejectReasonModal>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rejectReasonModalLabel">Reason for Rejection</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="rejectReasonForm">
+            <div class="mb-3">
+              <label for="reason" class="form-label label-modern shadow">Reason</label>
+              <textarea id="reason" formControlName="reason" class="form-control"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" (click)="confirmReject()">Reject</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #t let-date="date" let-focused="focused">
+    <span class="custom-day" [class.focused]="focused">{{ date.day }}</span>
+  </ng-template>
+  

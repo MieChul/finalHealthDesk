@@ -1,0 +1,313 @@
+<div class="container">
+    <h2 class="animated-heading text-center mb-4">
+      <i class="bi bi-pencil-square me-2"></i> Customize Prescription Header
+    </h2>
+    <div class="row mb-4">
+      <div class="col text-start">
+        <button class="btn btn-secondary" (click)="goBack()" data-bs-toggle="tooltip" data-bs-placement="right" title="Back"><i class="bi bi-arrow-left"></i></button>
+      </div>
+    </div>
+    <div class=" row mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <input type="text" [(ngModel)]="templateName" class="form-control form-control-lg" id="templateName" required />
+          <label for="templateName">Template Name</label>
+        </div>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary" (click)="triggerFileInput('logoFile')">Upload Logo/Image</button>
+        <input type="file" id="logoFile" (change)="onFileChange($event, 'logo')" hidden />
+      </div>
+  
+      <!-- Larger Make as Default switch -->
+      <div class="col d-flex align-items-center">
+        <label class="me-2 fs-5">Make as Default:</label>
+        <div class="form-check form-switch">
+          <input class="form-check-input form-check-lg" type="checkbox" id="isDefault" [(ngModel)]="isDefault" style="transform: scale(1.5);" />
+          <label class="form-check-label fs-5" for="isDefault"></label>
+        </div>
+      </div>
+    </div>
+    <!-- Phone Number (Hardcoded) -->
+    <div class="row align-items-center mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <input type="text" [(ngModel)]="clinicPhone" class="form-control form-control-lg" id="clinicPhone" readonly />
+          <label for="clinicPhone">Phone Number</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicPhoneFontType" class="form-select form-select-lg">
+            <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+          </select>
+          <label for="clinicPhoneFontType">Font</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicPhoneFontSize" class="form-select form-select-lg">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <label for="clinicPhoneFontSize">Size</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input type="color" [(ngModel)]="clinicPhoneFontColor" class="form-control form-control-lg" />
+          <label for="clinicPhoneFontColor">Color</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Physician Name (Hardcoded) -->
+    <div class="row align-items-center mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <input type="text" [(ngModel)]="physicianName" class="form-control form-control-lg" id="physicianName" readonly />
+          <label for="physicianName">Physician Name</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="physicianNameFontType" class="form-select form-select-lg">
+            <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+          </select>
+          <label for="physicianNameFontType">Font</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="physicianNameFontSize" class="form-select form-select-lg">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <label for="physicianNameFontSize">Size</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input type="color" [(ngModel)]="physicianNameFontColor" class="form-control form-control-lg" />
+          <label for="physicianNameFontColor">Color</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Qualification (Hardcoded) -->
+    <div class="row align-items-center mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <input type="text" [(ngModel)]="qualification" class="form-control form-control-lg" id="qualification" readonly value="MBBS, MD" />
+          <label for="qualification">Qualification</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="qualificationFontType" class="form-select form-select-lg">
+            <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+          </select>
+          <label for="qualificationFontType">Font</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="qualificationFontSize" class="form-select form-select-lg">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <label for="qualificationFontSize">Size</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input type="color" [(ngModel)]="qualificationFontColor" class="form-control form-control-lg" />
+          <label for="qualificationFontColor">Color</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- MRC Number (Hardcoded) -->
+    <div class="row align-items-center mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <input type="text" [(ngModel)]="mrcNumber" class="form-control form-control-lg" id="mrcNumber" readonly value="MRC123456" />
+          <label for="mrcNumber">MRC Number</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="mrcNumberFontType" class="form-select form-select-lg">
+            <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+          </select>
+          <label for="mrcNumberFontType">Font</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="mrcNumberFontSize" class="form-select form-select-lg">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <label for="mrcNumberFontSize">Size</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input type="color" [(ngModel)]="mrcNumberFontColor" class="form-control form-control-lg" />
+          <label for="mrcNumberFontColor">Color</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Clinic Name -->
+    <div class="row align-items-center mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicName" class="form-select form-select-lg" id="clinicName">
+            <option *ngFor="let clinic of clinics" [value]="clinic">{{ clinic }}</option>
+          </select>
+          <label for="clinicName">Clinic/Hospital Name</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicNameFontType" class="form-select form-select-lg">
+            <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+          </select>
+          <label for="clinicNameFontType">Font</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicNameFontSize" class="form-select form-select-lg">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <label for="clinicNameFontSize">Size</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input type="color" [(ngModel)]="clinicNameFontColor" class="form-control form-control-lg" />
+          <label for="clinicNameFontColor">Color</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Clinic Address -->
+    <div class="row align-items-center mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <textarea [(ngModel)]="clinicAddress" class="form-control form-control-lg" id="clinicAddress" placeholder="Address"></textarea>
+          <label for="clinicAddress">Address</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicAddressFontType" class="form-select form-select-lg">
+            <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+          </select>
+          <label for="clinicAddressFontType">Font</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicAddressFontSize" class="form-select form-select-lg">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <label for="clinicAddressFontSize">Size</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input type="color" [(ngModel)]="clinicAddressFontColor" class="form-control form-control-lg" />
+          <label for="clinicAddressFontColor">Color</label>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Clinic Timings -->
+    <div class="row align-items-center mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <input type="text" [(ngModel)]="clinicTimings" class="form-control form-control-lg" id="clinicTimings" placeholder="Timings" />
+          <label for="clinicTimings">Timings</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicTimingsFontType" class="form-select form-select-lg">
+            <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+          </select>
+          <label for="clinicTimingsFontType">Font</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="clinicTimingsFontSize" class="form-select form-select-lg">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <label for="clinicTimingsFontSize">Size</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input type="color" [(ngModel)]="clinicTimingsFontColor" class="form-control form-control-lg" />
+          <label for="clinicTimingsFontColor">Color</label>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row align-items-center mb-4">
+      <div class="col">
+        <div class="form-floating">
+          <input type="text" [(ngModel)]="footerText" class="form-control form-control-lg" id="footerText" placeholder="Footer Text" />
+          <label for="footerText">Footer Text</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="footerTextFontType" class="form-select form-select-lg">
+            <option *ngFor="let font of fonts" [value]="font">{{ font }}</option>
+          </select>
+          <label for="footerTextFontType">Font</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <select [(ngModel)]="footerTextFontSize" class="form-select form-select-lg">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+          <label for="footerTextFontSize">Size</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-floating">
+          <input type="color" [(ngModel)]="footerTextFontColor" class="form-control form-control-lg" />
+          <label for="footerTextFontColor">Color</label>
+        </div>
+      </div>
+    </div>
+  
+  
+    <!-- Buttons: Preview and Save centered -->
+    <div class="row">
+      <div class="col text-center">
+        <button class="btn btn-primary btn-lg me-3" (click)="previewHeader()">Preview Template</button>
+        <button class="btn btn-secondary btn-lg" (click)="saveTemplate()">Save Template</button> 
+      </div>
+    </div>
+  </div>
+  

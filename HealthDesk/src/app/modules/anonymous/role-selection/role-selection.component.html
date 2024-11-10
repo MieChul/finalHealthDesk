@@ -1,0 +1,53 @@
+<div class="capsule-container">
+    <div class="logo-container">
+      <div class="logo-animated"></div>
+      <h2>HealthDesk</h2>
+    </div>
+  
+    <h3 class="page-header">Select Your Role</h3>
+    <div class="roles-container">
+      <div class="row">
+        <div class="role-tile col physician-img m-1" (click)="selectRole('Physician')">
+          <img src="assets/physician.png"  alt="Physician" />
+          <div class="role-title">Physician</div>
+        </div>
+        <div class="role-tile col m-1" (click)="selectRole('Patient')">
+          <img src="assets/patient.png" alt="Patient" />
+          <div class="role-title">Patient</div>
+        </div>
+        <div class="role-tile col m-1" (click)="selectRole('Hospital')">
+          <img src="assets/hospital.png" alt="Hospital" />
+          <div class="role-title">Hospital</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="role-tile col m-1" (click)="selectRole('Pharmaceutical')">
+          <img src="assets/pharma.png" alt="Pharmaceutical" />
+          <div class="role-title">Pharmaceutical</div>
+        </div>
+        <div class="role-tile col m-1" (click)="selectRole('Nutraceutical')">
+          <img src="assets/neutra.png" alt="Nutraceutical" />
+          <div class="role-title">Nutraceutical</div>
+        </div>
+        <div class="role-tile col m-1" (click)="selectRole('Laboratory')">
+          <img src="assets/lab.png" alt="Laboratory" />
+          <div class="role-title">Laboratory</div>
+        </div>
+      </div> 
+    </div>
+    <div class="divider">or</div>
+  
+      <div class="auth-options">
+        <p class="signup-text">
+         Already have an account?
+          <a (click)="navigateToLogin()" class="signup-link cursor-pointer">
+            <mat-icon>person_add</mat-icon> Sign In
+          </a>
+        </p>
+        <p class="signup-text">
+          <a (click)="navigateVerifyPassword()" class="cursor-pointer">
+            <mat-icon>lock_open</mat-icon> Forgot Password?
+          </a>
+        </p>
+  </div>
+  

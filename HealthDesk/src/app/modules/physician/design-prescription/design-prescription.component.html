@@ -1,0 +1,54 @@
+<div class="container">
+    <h1 class="animated-heading">
+      <i class="bi bi-pencil-square me-2"></i>Design Prescription
+    </h1>
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-8 col-sm-6 d-flex justify-content-start flex-wrap">
+        <div class="mb-2 me-3 filter-container">
+          <label for="filterName" class="form-label label-modern">Filter by Name</label>
+          <input type="text" id="filterName" class="form-control" (input)="filterPrescriptions()">
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 d-flex justify-content-end flex-wrap">
+        <button class="btn btn-primary" (click)="addDesignPrescription()">Design New Prescription</button>
+      </div>
+    </div>
+  
+    <div *ngIf="filteredPrescriptions.length === 0" class="alert alert-info">
+      No prescription templates created yet. Click "Design New Prescription" to get started.
+    </div>
+  
+    <div *ngIf="filteredPrescriptions.length > 0" class="table-responsive">
+      <table class="table table-hover table-modern">
+        <thead>
+          <tr>
+            <th (click)="sortPrescriptions('name')">Name</th>
+            <th (click)="sortPrescriptions('clinic')">Clinic</th>
+            <th (click)="sortPrescriptions('isDefault')">Is Default</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prescription of filteredPrescriptions">
+            <td>{{ prescription.name }}</td>
+            <td>{{ prescription.clinic}}</td>
+            <td>{{ prescription.isDefault ? 'Yes' : 'No' }}</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-info btn-sm me-1" (click)="viewPrescription(prescription)">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn btn-warning btn-sm me-1" (click)="editPrescription(prescription)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-danger btn-sm" (click)="deletePrescription(prescription)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

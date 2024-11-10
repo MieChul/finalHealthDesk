@@ -1,0 +1,42 @@
+<div class="container">
+    <h2 class="animated-heading">
+      <i class="bi bi-clipboard me-2"></i>Surveys
+    </h2>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Search by Survey Name" [(ngModel)]="searchTerm" (input)="filterSurveys()">
+    </div>
+    <div class="table-responsive">
+      <table class="table table-hover table-modern">
+        <thead>
+          <tr>
+            <th (click)="sort('id')">Sr.No <i [ngClass]="getSortIcon('id')"></i></th>
+            <th (click)="sort('name')">Survey Name <i [ngClass]="getSortIcon('name')"></i></th>
+            <th (click)="sort('number')">Survey Number <i [ngClass]="getSortIcon('number')"></i></th>
+            <th (click)="sort('creator')">Creator <i [ngClass]="getSortIcon('creator')"></i></th>
+            <th (click)="sort('company')">Company <i [ngClass]="getSortIcon('company')"></i></th>
+            <th (click)="sort('expiryDate')">Expiry Date <i [ngClass]="getSortIcon('expiryDate')"></i></th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let survey of filteredSurveys; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ survey.name }}</td>
+            <td>{{ survey.number }}</td>
+            <td>{{ survey.creator }}</td>
+            <td>{{ survey.company }}</td>
+            <td>{{ survey.expiryDate | date }}</td>
+            <td>
+              <button class="btn btn-info btn-sm me-1" (click)="viewSurvey(survey.id)" [disabled]="!survey.isTaken" ngbTooltip="View Survey" tooltipClass="view-tooltip">
+                <i class="bi bi-eye"></i>
+              </button>
+              <button class="btn btn-primary btn-sm" (click)="takeSurvey(survey.id)" [disabled]="survey.isTaken" ngbTooltip="Take Survey" tooltipClass="take-tooltip">
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

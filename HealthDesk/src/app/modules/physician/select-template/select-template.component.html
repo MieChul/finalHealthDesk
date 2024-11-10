@@ -1,0 +1,21 @@
+<div class="container">
+    <h2 class="animated-heading text-center">
+      <i class="bi bi-card-list me-2"></i>Select a Prescription Template
+    </h2>
+    <div class="row mb-4">
+      <div class="col text-start">
+        <button class="btn btn-secondary" (click)="goBack()" data-bs-toggle="tooltip" data-bs-placement="right" title="Back"><i class="bi bi-arrow-left"></i></button>
+      </div>
+    </div>
+    <div class="row mb-2" *ngFor="let template of templates">
+      <div class="col-sm-3">
+        <div class="template-card card pointer-cursor" (click)="selectTemplate(template.id)">
+          <img [src]="template.imageUrl" class="card-img-top" alt="{{ template.name }}">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ template.name }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

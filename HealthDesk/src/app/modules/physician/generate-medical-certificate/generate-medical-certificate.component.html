@@ -1,0 +1,88 @@
+<div class="container">
+    <h2 class="animated-heading">
+      <i class="bi bi-file-earmark-medical me-2"></i>Generate Medical Certificate
+    </h2>
+    <div class="card">
+      <div class="card-body">
+        <form (ngSubmit)="generatePdf()">
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="text" class="form-control" id="patientName" [(ngModel)]="patientRecord.name" name="patientName" readonly>
+                <label for="patientName">Patient Name</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="number" class="form-control" id="age" [(ngModel)]="patientRecord.age" name="age" readonly>
+                <label for="age">Age</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="text" class="form-control" id="diagnosis" [(ngModel)]="diagnosis" name="diagnosis" required>
+                <label for="diagnosis">Diagnosis</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="date" class="form-control" id="treatmentFrom" [(ngModel)]="treatmentFrom" name="treatmentFrom" required>
+                <label for="treatmentFrom">Treatment From</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="date" class="form-control" id="treatmentTo" [(ngModel)]="treatmentTo" name="treatmentTo" required>
+                <label for="treatmentTo">Treatment To</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="number" class="form-control" id="daysRest" [(ngModel)]="daysRest" name="daysRest" required>
+                <label for="daysRest">Days Rest</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="date" class="form-control" id="restFromDate" [(ngModel)]="restFromDate" name="restFromDate" required>
+                <label for="restFromDate">Rest From</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="number" class="form-control" id="anotherDays" [(ngModel)]="anotherDays" name="anotherDays" required>
+                <label for="anotherDays">Another Days</label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-floating mb-3 floating-input">
+                <input type="date" class="form-control" id="fitToResumeFrom" [(ngModel)]="fitToResumeFrom" name="fitToResumeFrom" required>
+                <label for="fitToResumeFrom">Fit to Resume From</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-floating mb-3 floating-input">
+            <input type="text" class="form-control" id="identificationMark" [(ngModel)]="identificationMark" name="identificationMark" required>
+            <label for="identificationMark">Identification Mark</label>
+          </div>
+          <div class="form-floating mb-3 floating-input">
+            <input type="date" class="form-control" id="date" [(ngModel)]="date" name="date" required>
+            <label for="date">Date</label>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Generate PDF</button>
+            <button type="reset" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

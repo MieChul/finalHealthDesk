@@ -1,0 +1,183 @@
+<div class="container">
+    <h1 class="animated-heading">
+      <i class="bi bi-file-earmark-medical me-2"></i>Manage Patient Records
+    </h1>
+    <div class="row mb-3 align-items-center">
+      <div class="col-md-8 col-sm-6 d-flex justify-content-start flex-wrap">
+        <div class="mb-2 me-3 filter-container">
+          <label for="filterName" class="form-label label-modern">Filter by Name</label>
+          <input type="text" id="filterName" class="form-control" (input)="searchPatient($event)">
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 d-flex justify-content-end flex-wrap pointer-cursor">
+        <button class="btn btn-primary " (click)="openAddPatientPopup()">Add New Patient</button>
+      </div>
+    </div>
+  
+    <div *ngIf="patients.length === 0" class="alert alert-info">
+      No patients record created yet. Click "Add New Patient" to get started.
+    </div>
+  
+  
+    <div *ngIf="showHistory">
+      <button class="btn btn-secondary mb-3 pointer-cursor" (click)="backToMain()" data-bs-toggle="tooltip" data-bs-placement="top" title="Back">
+        <i class="bi bi-arrow-left"></i> Back
+      </button>
+      <div class="table-responsive">
+        <table class="table table-hover table-modern">
+          <tr>
+            <td><strong>Patient Name:</strong> {{ currentPatient?.name }}</td>
+            <td><strong>Age:</strong> {{ currentPatient?.age }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="table-container" infiniteScroll infiniteScrollDistance="2">
+        <table class="table table-hover table-modern">
+          <thead>
+            <tr>
+              <th>Sr.No.</th>
+              <th>Visited Date</th>
+              <th>Illness</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of patientHistory; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ record.date | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ record.illness }}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-info btn-sm pointer-cursor" (click)="viewPatient(record, record.prescriptionId)" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div *ngIf="!showHistory && patients.length > 0">
+      <div class="table-container" infiniteScroll  infiniteScrollDistance="2">
+        <table class="table table-hover table-modern">
+          <thead>
+            <tr>
+              <th (click)="sortTable('id')">Sr.No.</th>
+              <th (click)="sortTable('name')">Patient Name</th>
+              <th (click)="sortTable('age')">Age</th>
+              <th (click)="sortTable('mobile')">Mobile Number</th>
+              <th (click)="sortTable('lastVisited')">Last Visited Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of filteredPatients">
+              <td>{{ patient.id }}</td>
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.age }}</td>
+              <td>{{ patient.mobile }}</td>
+              <td>{{ patient.lastVisited | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <div class="action-buttons">
+                  <button class="btn btn-info btn-sm m-1 pointer-cursor"  (click)="viewPatient(patient)" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                  <button class="btn btn-warning btn-sm  m-1 pointer-cursor" (click)="viewHistory(patient)"  data-bs-toggle="tooltip" data-bs-placement="top" title="History">
+                    <i class="bi bi-clock-history"></i>
+                  </button>
+                  <button class="btn btn-success btn-sm  m-1 pointer-cursor" (click)="createPrescription(patient)" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate Prescription">
+                    <i class="bi bi-file-earmark-text"></i>
+                  </button>
+                  <button class="btn btn-secondary btn-sm  m-1 pointer-cursor" (click)="createCertificate(patient)" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate Medical Certificate">
+                    <i class="bi bi-file-earmark-medical"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add Patient Modal -->
+  <!-- Add Patient Modal -->
+  <div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="addPatientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addPatientModalLabel">Add New Patient</h5>
+          <button type="button pointer-cursor" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="addPatient()">
+            <!-- Name Input -->
+            <div class="form-floating mb-3">
+              <input 
+                type="text" 
+                id="name" 
+                [(ngModel)]="newPatient.name" 
+                name="name" 
+                class="form-control" 
+                placeholder="Name" 
+                required />
+              <label for="name">Name</label>
+              <span *ngIf="nameError" class="text-danger mt-1 mb-3">{{ nameError }}</span>
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label d-block">Gender</label>
+              <div class="form-check form-switch">
+                <input type="radio" class="btn-check" id="male" name="gender" [(ngModel)]="newPatient.gender" value="Male" autocomplete="off">
+                <label class="btn btn-outline-primary" for="male">
+                  <i class="bi bi-gender-male"></i> Male
+                </label>
+  
+                <input type="radio" class="btn-check" id="female" name="gender" [(ngModel)]="newPatient.gender" value="Female" autocomplete="off">
+                <label class="btn btn-outline-primary" for="female">
+                  <i class="bi bi-gender-female"></i> Female
+                </label>
+              </div>
+              <span *ngIf="genderError" class="text-danger">{{ genderError }}</span>
+            </div>
+  
+            <!-- Age Input -->
+            <div class="form-floating mb-3">
+              <input 
+                type="number" 
+                id="age" 
+                [(ngModel)]="newPatient.age" 
+                name="age" 
+                class="form-control" 
+                placeholder="Age" 
+                required />
+              <label for="age">Age</label>
+              <span *ngIf="ageError" class="text-danger mt-1 mb-3">{{ ageError }}</span>
+            </div>
+  
+            <!-- Mobile Input -->
+            <div class="form-floating mb-3">
+              <input 
+                type="text" 
+                id="mobile" 
+                [(ngModel)]="newPatient.mobile" 
+                name="mobile" 
+                class="form-control" 
+                placeholder="Mobile Number" 
+                required />
+              <label for="mobile">Mobile Number</label>
+              <span *ngIf="mobileError" class="text-danger mt-1 mb-3">{{ mobileError }}</span>
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary pointer-cursor" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary pointer-cursor">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,15 @@
+D:\HealthDesk\HealthDesk.Infrastructure\bin\Debug\net8.0\HealthDesk.Infrastructure.deps.json
+D:\HealthDesk\HealthDesk.Infrastructure\bin\Debug\net8.0\HealthDesk.Infrastructure.dll
+D:\HealthDesk\HealthDesk.Infrastructure\bin\Debug\net8.0\HealthDesk.Infrastructure.pdb
+D:\HealthDesk\HealthDesk.Infrastructure\bin\Debug\net8.0\HealthDesk.Core.dll
+D:\HealthDesk\HealthDesk.Infrastructure\bin\Debug\net8.0\HealthDesk.Core.pdb
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\HealthDesk.Infrastructure.csproj.AssemblyReference.cache
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\HealthDesk.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\HealthDesk.Infrastructure.AssemblyInfoInputs.cache
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\HealthDesk.Infrastructure.AssemblyInfo.cs
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\HealthDesk.Infrastructure.csproj.CoreCompileInputs.cache
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\HealthDe.B87F8CA4.Up2Date
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\HealthDesk.Infrastructure.dll
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\refint\HealthDesk.Infrastructure.dll
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\HealthDesk.Infrastructure.pdb
+D:\HealthDesk\HealthDesk.Infrastructure\obj\Debug\net8.0\ref\HealthDesk.Infrastructure.dll

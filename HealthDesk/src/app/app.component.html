@@ -1,0 +1,14 @@
+<!-- <ng-container class="layout-container" *ngIf="false">
+  <app-header></app-header>
+  <app-side-nav [navItems]="navItems"></app-side-nav>
+  <div class="content">
+      <app-loader *ngIf="isLoading | async"></app-loader>
+      <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</ng-container> -->
+
+<ng-container> 
+  <app-loader *ngIf="isLoading | async"></app-loader>
+  <router-outlet></router-outlet>
+</ng-container> 

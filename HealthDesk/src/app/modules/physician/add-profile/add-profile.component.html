@@ -1,0 +1,44 @@
+<div class="container">
+    <h1 class="animated-heading">
+      <i class="bi bi-plus-circle me-2"></i>Add Profile
+    </h1>
+  
+    <div class="header mb-3">
+      <button class="btn btn-secondary m-1" (click)="navigateBackToPrescription()">Back</button> 
+      <button class="btn btn-secondary me-1" (click)="addNewProfile()">
+        <i class="bi bi-person-plus me-2"></i>Add New Profile
+      </button>
+      <button class="btn btn-primary" (click)="saveProfiles()">
+        <i class="bi bi-save me-2"></i>Save Profiles
+      </button>
+    </div>
+  
+    <div class="profile-list">
+      <div class="card mb-3" *ngFor="let profile of profiles; let i = index">
+        <div class="card-body">
+          <h5 class="card-title">
+            Profile {{ i + 1 }}: {{ profile.name }}
+          </h5>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" [(ngModel)]="profile.name" placeholder="Profile Name" />
+            <label for="profileName">Profile Name</label>
+          </div>
+          <div *ngFor="let investigation of profile.investigations; let j = index">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" [(ngModel)]="investigation.name" placeholder="Investigation Name" />
+              <button class="btn btn-danger" (click)="removeInvestigation(i, j)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+          <button class="btn btn-success m-1" (click)="addInvestigation(i)">
+            <i class="bi bi-plus-lg"></i> Add Investigation
+          </button>
+          <button class="btn btn-danger m-1" (click)="removeProfile(i)">
+            <i class="bi bi-x-lg"></i> Remove Profile
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthDesk.API", "HealthDesk.API\HealthDesk.API.csproj", "{61C3CF51-74EB-46D4-AA7A-CCE4E84A29CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthDesk.Core", "HealthDesk.Core\HealthDesk.Core.csproj", "{3933B2DA-58C0-4C81-933B-3C7D9AE294BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthDesk.Infrastructure", "HealthDesk.Infrastructure\HealthDesk.Infrastructure.csproj", "{06E67089-31A5-4226-84E4-B19B5AAEBE37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthDesk.Application", "HealthDesk.Application\HealthDesk.Application.csproj", "{E896393C-607B-4742-B58F-AE56E1156B35}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61C3CF51-74EB-46D4-AA7A-CCE4E84A29CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61C3CF51-74EB-46D4-AA7A-CCE4E84A29CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61C3CF51-74EB-46D4-AA7A-CCE4E84A29CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61C3CF51-74EB-46D4-AA7A-CCE4E84A29CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3933B2DA-58C0-4C81-933B-3C7D9AE294BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3933B2DA-58C0-4C81-933B-3C7D9AE294BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3933B2DA-58C0-4C81-933B-3C7D9AE294BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3933B2DA-58C0-4C81-933B-3C7D9AE294BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06E67089-31A5-4226-84E4-B19B5AAEBE37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E67089-31A5-4226-84E4-B19B5AAEBE37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E67089-31A5-4226-84E4-B19B5AAEBE37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E67089-31A5-4226-84E4-B19B5AAEBE37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E896393C-607B-4742-B58F-AE56E1156B35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E896393C-607B-4742-B58F-AE56E1156B35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E896393C-607B-4742-B58F-AE56E1156B35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E896393C-607B-4742-B58F-AE56E1156B35}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
