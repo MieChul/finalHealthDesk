@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Fwa6O2J1DgeQWASR+/q0NdUgo0pIXpn0ICZudvJJHnecxRk5YHbcS6U0R/6PP1hSvvdlBjJdS3J/GU3wAgudFg==",
+  "dgSpecHash": "1b+zo6Agv5rMetFZ3HRUvtRk1W1BxvNeNb7B+KCrD4hC6llnXUsgFMI2vU6Y+QOuPao4cngmpm/FMF8x84sDBA==",
   "success": true,
-  "projectFilePath": "D:\\HealthDesk\\HealthDesk.Core\\HealthDesk.Core.csproj",
+  "projectFilePath": "D:\\HD\\finalHealthDesk\\HealthDesk\\HealthDesk.Core\\HealthDesk.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\2.0.0\\microsoft.extensions.logging.abstractions.2.0.0.nupkg.sha512",

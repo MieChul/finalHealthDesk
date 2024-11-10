@@ -3660,11 +3660,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HealthDesk\\HealthDesk.API\\HealthDesk.API.csproj",
+      "projectUniqueName": "D:\\HD\\finalHealthDesk\\HealthDesk\\HealthDesk.API\\HealthDesk.API.csproj",
       "projectName": "HealthDesk.API",
-      "projectPath": "D:\\HealthDesk\\HealthDesk.API\\HealthDesk.API.csproj",
+      "projectPath": "D:\\HD\\finalHealthDesk\\HealthDesk\\HealthDesk.API\\HealthDesk.API.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "D:\\HealthDesk\\HealthDesk.API\\obj\\",
+      "outputPath": "D:\\HD\\finalHealthDesk\\HealthDesk\\HealthDesk.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -3679,8 +3679,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\HealthDesk\\HealthDesk.Application\\HealthDesk.Application.csproj": {
-              "projectPath": "D:\\HealthDesk\\HealthDesk.Application\\HealthDesk.Application.csproj"
+            "D:\\HD\\finalHealthDesk\\HealthDesk\\HealthDesk.Application\\HealthDesk.Application.csproj": {
+              "projectPath": "D:\\HD\\finalHealthDesk\\HealthDesk\\HealthDesk.Application\\HealthDesk.Application.csproj"
             }
           }
         }
